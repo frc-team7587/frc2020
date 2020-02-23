@@ -7,35 +7,36 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.*;
-import frc.robot.Robot;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Intake;
 
-public class TeleOpDrive extends CommandBase {
+public class AutoCommand extends CommandBase {
   /**
-   * Creates a new TeleOpDrive.
+   * Creates a new AutoCommand.
    */
 
   private DriveTrain m_drive;
-  private Joystick stick;
+  private Arm m_arm;
+  private Intake m_intake;
 
-  public TeleOpDrive(DriveTrain subsystem) {
+  public AutoCommand(Subsystem... subsystem) {
     addRequirements(subsystem);
-    m_drive = subsystem;
+    m_drive = (DriveTrain) subsystem[0];
+    m_arm = (Arm) subsystem[1];
+    m_intake =  (Intake) subsystem[2];
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    stick = Robot.getRoCon().getLogi();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drive.drive(-stick.getY() * stick.getThrottle(), 0.75 * stick.getTwist() * Math.abs(stick.getThrottle()));
   }
 
   // Called once the command ends or is interrupted.

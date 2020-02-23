@@ -7,15 +7,20 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.Robot;
+import frc.robot.subsystems.Hanger;
 
 public class HangRet extends CommandBase {
   /**
    * Creates a new HangRet.
    */
-  public HangRet() {
-    addRequirements(Robot.m_hanger);
+
+  private Hanger m_hanger;
+
+  public HangRet(Hanger subsystem) {
+    addRequirements(subsystem);
+    m_hanger = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -27,18 +32,18 @@ public class HangRet extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.m_hanger.retract();
+    m_hanger.retract();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.m_hanger.stop();
+    m_hanger.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !Robot.m_oi.getHangRetBut();
+    return !Robot.getRoCon().getHangRetBut();
   }
 }

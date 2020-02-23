@@ -8,18 +8,22 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.Robot;
+import frc.robot.subsystems.Spinner;
 
 public class SpinAround extends CommandBase {
   /**
    * Creates a new SpinAround.
    */
+
+  private Spinner m_spinner;
   private Timer time;
 
-  public SpinAround() {
+  public SpinAround(Spinner subsystem) {
+    addRequirements(subsystem);
+    m_spinner = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.m_spinner);
     time = new Timer();
   }
 
@@ -37,7 +41,7 @@ public class SpinAround extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.m_spinner.stop();
+    m_spinner.stop();
   }
 
   // Returns true when the command should end.

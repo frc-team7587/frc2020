@@ -7,16 +7,21 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.Robot;
+import frc.robot.subsystems.Intake;
 
 public class GoOut extends CommandBase {
   /**
    * Creates a new GoOut.
    */
-  public GoOut() {
+
+   private Intake m_intake;
+
+  public GoOut(Intake subsystem) {
+    addRequirements(subsystem);
+    m_intake = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.m_intake);
   }
 
   // Called when the command is initially scheduled.
@@ -27,19 +32,19 @@ public class GoOut extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.m_intake.out();
+    m_intake.out();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.m_intake.stop();
+    m_intake.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !Robot.m_oi.getOutBut();
-    // return !Robot.m_oi.getRTrig();
+    return !Robot.getRoCon().getOutBut();
+    // return !Robot.getRoCon().getRTrig();
   }
 }

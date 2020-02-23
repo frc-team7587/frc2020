@@ -7,18 +7,21 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.Robot;
+import frc.robot.subsystems.Spinner;
 
 public class SpinColor extends CommandBase {
   /**
    * Creates a new SpinColor.
    */
 
+  private Spinner m_spinner;
 
-  public SpinColor(int aimColor) {
+  public SpinColor(Spinner subsystem) {
+    addRequirements(subsystem);
+    m_spinner = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.m_spinner);
   }
 
   // Called when the command is initially scheduled.

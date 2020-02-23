@@ -18,9 +18,12 @@ public class AutoForward extends CommandBase {
    */
   Timer time = new Timer();
 
-  public AutoForward() {
+  private DriveTrain mdrive;
+
+  public AutoForward(DriveTrain drive) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.m_drive);
+    addRequirements(drive);
+    mdrive = drive;
   }
 
   // Called when the command is initially scheduled.
@@ -33,13 +36,13 @@ public class AutoForward extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.m_drive.drive(0.25, 0);
+    mdrive.drive(0.25, 0);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.m_drive.stop();
+    mdrive.stop();
   }
 
   // Returns true when the command should end.

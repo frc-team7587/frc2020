@@ -18,8 +18,11 @@ public class AutoSpin extends CommandBase {
    */
   Timer time = new Timer();
 
-  public AutoSpin() {
-    addRequirements(Robot.m_drive);
+  private DriveTrain mdrive;
+
+  public AutoSpin(DriveTrain drive) {
+    addRequirements(drive);
+    mdrive = drive;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -33,13 +36,13 @@ public class AutoSpin extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.m_drive.drive(0, 0.25);
+    mdrive.drive(0, 0.25);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.m_drive.stop();
+    mdrive.stop();
   }
 
   // Returns true when the command should end.
