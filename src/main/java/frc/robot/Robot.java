@@ -58,12 +58,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("AutoChoices", m_chooser);
   }
 
-  // public static DriveTrain getDriveTrain(){
-  // if(m_drive==null){
-  // m_drive = new DriveTrain();
-  // }
-  // return m_drive;
-  // }
   /**
    * This function is called every robot packet, no matter the mode. Use this for
    * items like diagnostics that you want ran during disabled, autonomous,
