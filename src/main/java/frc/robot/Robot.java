@@ -121,12 +121,17 @@ public class Robot extends TimedRobot {
 
   }
 
+  @Override
+  public void teleopInit() {
+    m_drive.setDefaultCommand(defaultCom);
+  }
+
   /**
    * This function is called periodically during operator control.
    */
   @Override
   public void teleopPeriodic() {
-    m_drive.setDefaultCommand(defaultCom);
+
   }
 
   /**
