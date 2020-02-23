@@ -52,8 +52,8 @@ public class OI {
         btnOut.whileHeld(new GoOut());
 
         // hopefully constant buttons so no worries
-        // btnHangEx.whileHeld(new HangEx());
-        // btnHangRet.whileHeld(new HangRet());
+        btnHangEx.whileHeld(new HangEx());
+        btnHangRet.whileHeld(new HangRet());
 
         btnArmUp.whileHeld(new ArmUp());
         btnArmDown.whileHeld(new ArmDown());

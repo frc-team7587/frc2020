@@ -22,11 +22,11 @@ public class Hanger extends SubsystemBase {
   }
 
   public void extend() {
-    talon.set(ControlMode.PercentOutput, 0.25);
+    talon.set(ControlMode.PercentOutput, -.75);
   }
 
   public void retract() {
-    talon.set(ControlMode.PercentOutput, -0.25);
+    talon.set(ControlMode.PercentOutput, 0.75);
   }
 
   public void stop() {
