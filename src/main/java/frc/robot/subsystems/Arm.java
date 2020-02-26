@@ -7,31 +7,31 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.SparkMax;
 
+import edu.wpi.first.wpilibj.PWMSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase {
   /**
    * Creates a new Arm.
    */
-  private final TalonSRX talon = new TalonSRX(1);
+  // private final TalonSRX talon = new TalonSRX(1);
+  private final PWMSparkMax sparky = new PWMSparkMax(4);
 
   public Arm() {
-
   }
 
   public void raise() {
-    talon.set(ControlMode.PercentOutput, 1);
+    sparky.set(0.25);
   }
 
   public void lower() {
-    talon.set(ControlMode.PercentOutput, -1);
+    sparky.set(-0.25);
   }
 
   public void stop() {
-    talon.set(ControlMode.PercentOutput, 0);
+    sparky.stopMotor();
   }
 
   @Override
