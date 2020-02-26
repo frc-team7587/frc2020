@@ -15,35 +15,15 @@ public class RobotContainer {
     private final Spinner m_spinner = new Spinner();
     private final Arm m_arm = new Arm();
 
-    // Commands
-    private final ArmDown m_armDown = new ArmDown(m_arm);
-    private final ArmUp m_armUp = new ArmUp(m_arm);
-    private final AutoCommand m_autoCommand = new AutoCommand(m_drive, m_arm, m_intake);
-    private final GoOut m_goOut = new GoOut(m_intake);
-    private final HangEx m_hangEx = new HangEx(m_hanger);
-    private final HangRet m_hangRet = new HangRet(m_hanger);
-    private final SpinAround m_spinAround = new SpinAround(m_spinner);
-    private final SpinColor m_spinColor = new SpinColor(m_spinner);
-    private final TakeIn m_takeIn = new TakeIn(m_intake);
-    private final TeleOpDrive defaultCom = new TeleOpDrive(m_drive);
-    private final AutoForward m_autoFor = new AutoForward(m_drive);
-    private final AutoOutput m_autoOut = new AutoOutput(m_intake);
-    private final AutoSpin m_autoSpin = new AutoSpin(m_drive);
-
     // Controllers
-    private final Joystick logi = new Joystick(0);
-    private final Joystick gamePad = new Joystick(1);
+    final Joystick logi = new Joystick(0);
+    final Joystick gamePad = new Joystick(1);
 
-    // Buttons
-    private final Button btnOut = new JoystickButton(gamePad, 6);
-    private final Button btnIn = new JoystickButton(gamePad, 5);
-
-    private final Button btnHangEx = new JoystickButton(gamePad, 4);
-    private final Button btnHangRet = new JoystickButton(gamePad, 2);
-    private final Button btnArmDown = new JoystickButton(gamePad, 1);
-    private final Button btnArmUp = new JoystickButton(gamePad, 3);
+    private final CommandBase m_autoCommand = new AutoCommand();
 
     public RobotContainer() {
+        m_drive.setDefaultCommand(new TeleOpDrive(() -> -logi.getY() * logi.getThrottle(),
+                () -> 0.75 * logi.getTwist() * Math.abs(logi.getThrottle()), m_drive));
         configureButtonBindings();
     }
 
@@ -55,75 +35,30 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
 
+        // Buttons
+        final Button btnOut = new JoystickButton(gamePad, 6);
+        final Button btnIn = new JoystickButton(gamePad, 5);
+
+        final Button btnHangEx = new JoystickButton(gamePad, 4);
+        final Button btnHangRet = new JoystickButton(gamePad, 2);
+        final Button btnArmDown = new JoystickButton(gamePad, 1);
+        final Button btnArmUp = new JoystickButton(gamePad, 3);
+
+        btnOut.whenPressed(new GoOut(m_intake, () -> (!btnOut.get())));
+        btnIn.whenPressed(new TakeIn(m_intake, () -> (!btnIn.get())));
+        btnHangEx.whenPressed(new HangEx(m_hanger, () -> (!btnHangEx.get())));
+        btnHangRet.whenPressed(new HangRet(m_hanger, () -> (!btnHangRet.get())));
+        btnArmDown.whenPressed(new ArmDown(m_arm, () -> (!btnArmDown.get())));
+        btnArmUp.whenPressed(new ArmUp(m_arm, () -> (!btnArmUp.get())));
         // joystick solo control
-        // private final Button btnOut = new JoystickButton(logi, 1);
-        // private final Button btnIn = new JoystickButton(logi, 2);
+        // final Button btnOut = new JoystickButton(logi, 1);
+        // final Button btnIn = new JoystickButton(logi, 2);
 
-        // private final Button btnHangEx = new JoystickButton(logi, 3);
-        // private final Button btnHangRet = new JoystickButton(logi, 5);
+        // final Button btnHangEx = new JoystickButton(logi, 3);
+        // final Button btnHangRet = new JoystickButton(logi, 5);
 
-        // private final Button btnArmDown = new JoystickButton(logi, 4);
-        // private final Button btnArmUp = new JoystickButton(logi, 6);
-
-        // gamepad two player control
-
-        // swapping between two buttons and triggers
-
-        // triggercontrol with gamepad
-        // if (gamePad.getRawAxis(3) == 1) {
-        // new GoOut();
-        // }
-        // if (gamePad.getRawAxis(2) == 1) {
-        // new TakeIn();
-        // }
-
-        // button control with joystick
-        btnIn.whileHeld(m_takeIn);
-        btnOut.whileHeld(m_goOut);
-
-        // hopefully constant buttons so no worries
-        btnHangEx.whileHeld(m_hangEx);
-        btnHangRet.whileHeld(m_hangRet);
-
-        btnArmUp.whileHeld(m_armUp);
-        btnArmDown.whileHeld(m_armDown);
-
-    }
-
-    public boolean getInBut() {
-        return btnIn.get();
-    }
-
-    public boolean getOutBut() {
-        return btnOut.get();
-    }
-
-    public boolean getHangExBut() {
-        return btnHangEx.get();
-    }
-
-    public boolean getHangRetBut() {
-        return btnHangRet.get();
-    }
-
-    public boolean getArmUpBut() {
-        return btnArmUp.get();
-    }
-
-    public boolean getArmDownBut() {
-        return btnArmDown.get();
-    }
-
-    public boolean getRTrig() {
-        return gamePad.getRawAxis(3) == 1;
-    }
-
-    public boolean getLTrig() {
-        return gamePad.getRawAxis(2) == 1;
-    }
-
-    public Joystick getLogi() {
-        return logi;
+        // final Button btnArmDown = new JoystickButton(logi, 4);
+        // final Button btnArmUp = new JoystickButton(logi, 6);
     }
 
     /**
@@ -136,10 +71,6 @@ public class RobotContainer {
         return m_autoCommand;
     }
 
-    public Command getDefaultCommand() {
-        return defaultCom;
-    }
-
     public DriveTrain getDriveTrain() {
         return m_drive;
     }
@@ -150,17 +81,5 @@ public class RobotContainer {
 
     public Intake getIntake() {
         return m_intake;
-    }
-
-    public AutoForward getAutoFor() {
-        return m_autoFor;
-    }
-
-    public AutoSpin getAutoSpin() {
-        return m_autoSpin;
-    }
-
-    public AutoOutput getAutoOut() {
-        return m_autoOut;
     }
 }

@@ -7,18 +7,20 @@
 
 package frc.robot.commands;
 
+import java.util.function.BooleanSupplier;
+
 import edu.wpi.first.wpilibj2.command.*;
-import frc.robot.Robot;
 import frc.robot.subsystems.Hanger;
 
-public class HangEx extends CommandBase {
+public class HangEx extends WaitUntilCommand {
   /**
    * Creates a new Hang.
    */
 
   private Hanger m_hanger;
 
-  public HangEx(Hanger subsystem) {
+  public HangEx(Hanger subsystem, BooleanSupplier btnState) {
+    super(btnState);
     addRequirements(subsystem);
     m_hanger = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -39,11 +41,5 @@ public class HangEx extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_hanger.stop();
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return !Robot.getRoCon().getHangExBut();
   }
 }

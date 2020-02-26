@@ -7,18 +7,20 @@
 
 package frc.robot.commands;
 
+import java.util.function.BooleanSupplier;
+
 import edu.wpi.first.wpilibj2.command.*;
-import frc.robot.Robot;
 import frc.robot.subsystems.*;
 
-public class ArmUp extends CommandBase {
+public class ArmUp extends WaitUntilCommand {
   /**
    * Creates a new ArmUp.
    */
 
   private Arm m_arm;
-  
-  public ArmUp(Arm subsystem) {
+
+  public ArmUp(Arm subsystem, BooleanSupplier btnState) {
+    super(btnState);
     addRequirements(subsystem);
     m_arm = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -39,11 +41,5 @@ public class ArmUp extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_arm.stop();
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return !Robot.getRoCon().getArmUpBut();
   }
 }

@@ -7,18 +7,20 @@
 
 package frc.robot.commands;
 
+import java.util.function.BooleanSupplier;
+
 import edu.wpi.first.wpilibj2.command.*;
-import frc.robot.Robot;
 import frc.robot.subsystems.*;
 
-public class ArmDown extends CommandBase {
+public class ArmDown extends WaitUntilCommand {
   /**
    * Creates a new ArmDown.
    */
-
+  // new ArmDown(m_arm, () -> (!btn.get()));
   private Arm m_arm;
 
-  public ArmDown(Arm subsystem) {
+  public ArmDown(Arm subsystem, BooleanSupplier btnState) {
+    super(btnState);
     addRequirements(subsystem);
     m_arm = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -39,11 +41,5 @@ public class ArmDown extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_arm.stop();
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return !Robot.getRoCon().getArmDownBut();
   }
 }

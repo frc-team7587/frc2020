@@ -7,18 +7,20 @@
 
 package frc.robot.commands;
 
+import java.util.function.BooleanSupplier;
+
 import edu.wpi.first.wpilibj2.command.*;
-import frc.robot.Robot;
 import frc.robot.subsystems.Intake;
 
-public class GoOut extends CommandBase {
+public class GoOut extends WaitUntilCommand {
   /**
    * Creates a new GoOut.
    */
 
-   private Intake m_intake;
+  private Intake m_intake;
 
-  public GoOut(Intake subsystem) {
+  public GoOut(Intake subsystem, BooleanSupplier btnState) {
+    super(btnState);
     addRequirements(subsystem);
     m_intake = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -39,12 +41,5 @@ public class GoOut extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_intake.stop();
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return !Robot.getRoCon().getOutBut();
-    // return !Robot.getRoCon().getRTrig();
   }
 }

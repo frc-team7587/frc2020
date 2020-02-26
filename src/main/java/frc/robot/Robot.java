@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj2.command.*;
 
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -78,26 +77,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autoSelected = m_chooser.getSelected();
-    SmartDashboard.getString("AutoChoices", kDefaultAuto);
-    // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    System.out.println("Auto selected: " + m_autoSelected);
 
-    switch (m_autoSelected) {
-    case "Spin 1 sec 25%":
-      // Put custom auto code here
-      getRoCon().getAutoSpin().schedule();
-      break;
-    case "Forward 1 sec 25%":
-      getRoCon().getAutoFor().schedule();
-      // Put default auto code here
-      break;
-    case "Release balls":
-      getRoCon().getAutoFor().schedule();
-      getRoCon().getAutoSpin().schedule();
-      getRoCon().getAutoOut().schedule();
-      break;
-    }
   }
 
   /**
@@ -110,7 +90,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    getRoCon().getDriveTrain().setDefaultCommand(getRoCon().getDefaultCommand());
+
   }
 
   /**

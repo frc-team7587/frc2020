@@ -23,11 +23,11 @@ public class Intake extends SubsystemBase {
   }
 
   public void in() {
-    talon.set(ControlMode.PercentOutput, .8); // may need to change this number later
+    talon.set(ControlMode.PercentOutput, .5); // may need to change this number later
   }
 
   public void out() {
-    talon.set(ControlMode.PercentOutput, -.8); // also a guesstimate number
+    talon.set(ControlMode.PercentOutput, -.5); // also a guesstimate number
   }
 
   public void stop() {
