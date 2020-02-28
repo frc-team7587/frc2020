@@ -13,10 +13,6 @@ import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.subsystems.*;
 
 public class ArmDown extends WaitUntilCommand {
-  /**
-   * Creates a new ArmDown.
-   */
-  // new ArmDown(m_arm, () -> (!btn.get()));
   private Arm m_arm;
 
   public ArmDown(Arm subsystem, BooleanSupplier btnState) {

@@ -19,7 +19,7 @@ public class RobotContainer {
     final Joystick logi = new Joystick(0);
     final Joystick gamePad = new Joystick(1);
 
-    private final CommandBase m_autoCommand = new AutoCommand();
+    // private final CommandBase m_autoCommand = new AutoCommand();
 
     public RobotContainer() {
         m_drive.setDefaultCommand(new TeleOpDrive(() -> -logi.getY() * logi.getThrottle(),
@@ -35,22 +35,26 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
 
+        // Gamepad Buttons to ID
+ 
         // Buttons
         final Button btnOut = new JoystickButton(gamePad, 6);
         final Button btnIn = new JoystickButton(gamePad, 5);
-
         final Button btnHangEx = new JoystickButton(gamePad, 4);
         final Button btnHangRet = new JoystickButton(gamePad, 2);
         final Button btnArmDown = new JoystickButton(gamePad, 1);
         final Button btnArmUp = new JoystickButton(gamePad, 3);
 
+        // Joystick + Gamepad 
         btnOut.whenPressed(new GoOut(m_intake, () -> (!btnOut.get())));
         btnIn.whenPressed(new TakeIn(m_intake, () -> (!btnIn.get())));
         btnHangEx.whenPressed(new HangEx(m_hanger, () -> (!btnHangEx.get())));
         btnHangRet.whenPressed(new HangRet(m_hanger, () -> (!btnHangRet.get())));
         btnArmDown.whenPressed(new ArmDown(m_arm, () -> (!btnArmDown.get())));
         btnArmUp.whenPressed(new ArmUp(m_arm, () -> (!btnArmUp.get())));
-        // joystick solo control
+
+
+        // Joystick Solo Control
         // final Button btnOut = new JoystickButton(logi, 1);
         // final Button btnIn = new JoystickButton(logi, 2);
 
@@ -59,6 +63,7 @@ public class RobotContainer {
 
         // final Button btnArmDown = new JoystickButton(logi, 4);
         // final Button btnArmUp = new JoystickButton(logi, 6);
+
     }
 
     /**
@@ -66,10 +71,10 @@ public class RobotContainer {
      *
      * @return the command to run in autonomous
      */
-    public Command getAutonomousCommand() {
-        // An ExampleCommand will run in autonomous
-        return m_autoCommand;
-    }
+    // public Command getAutonomousCommand() {
+    //     // An ExampleCommand will run in autonomous
+    //     return m_autoCommand;
+    // }
 
     public DriveTrain getDriveTrain() {
         return m_drive;
