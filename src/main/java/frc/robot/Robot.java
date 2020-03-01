@@ -25,7 +25,7 @@ public class Robot extends TimedRobot {
   // private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
-
+  private Command m_autoCommand;
   private static RobotContainer m_robotContainer;
 
   /**
@@ -77,7 +77,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    m_autoCommand = m_robotContainer.getAutonomousCommand();
 
+    if (m_autoCommand != null) {
+      m_autoCommand.schedule();
+    }
   }
 
   /**
@@ -90,7 +94,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-
+    if (m_autoCommand != null) {
+      m_autoCommand.cancel();
+    }
   }
 
   /**
@@ -98,6 +104,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+  }
+
+  @Override
+  public void testInit() {
+    if (m_autoCommand != null) {
+      m_autoCommand.cancel();
+    }
   }
 
   /**

@@ -7,9 +7,7 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.revrobotics.SparkMax;
-
+import static frc.robot.Constants.*;
 import edu.wpi.first.wpilibj.PWMSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -17,18 +15,14 @@ public class Arm extends SubsystemBase {
   /**
    * Creates a new Arm.
    */
-  private final PWMSparkMax sMax = new PWMSparkMax(4);
-
-  public Arm() {
-
-  }
+  private final PWMSparkMax sMax = new PWMSparkMax(ARM_SPARK_PWM_ID);
 
   public void raise() {
-    sMax.set(0.10);
+    sMax.set(ARM_MAX_SPEED);
   }
 
   public void lower() {
-    sMax.set(-0.10);
+    sMax.set(-ARM_MAX_SPEED);
   }
 
   public void stop() {

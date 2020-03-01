@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.button.*;
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+import static frc.robot.Constants.*;
 
 public class RobotContainer {
 
@@ -19,11 +20,15 @@ public class RobotContainer {
     final Joystick logi = new Joystick(0);
     final Joystick gamePad = new Joystick(1);
 
-    // private final CommandBase m_autoCommand = new AutoCommand();
+    private final Command m_autoCommand = new AutoPortDeploy(m_drive, m_intake);
 
     public RobotContainer() {
-        m_drive.setDefaultCommand(new TeleOpDrive(() -> -logi.getY() * logi.getThrottle(),
-                () -> 0.75 * logi.getTwist() * Math.abs(logi.getThrottle()), m_drive));
+
+        m_drive.setDefaultCommand(
+            new RunCommand(() -> m_drive.drive(-logi.getY() * logi.getThrottle(),
+                0.75 * logi.getTwist() * Math.abs(logi.getThrottle())), m_drive)
+            );
+
         configureButtonBindings();
     }
 
@@ -36,23 +41,22 @@ public class RobotContainer {
     private void configureButtonBindings() {
 
         // Gamepad Buttons to ID
- 
-        // Buttons
-        final Button btnOut = new JoystickButton(gamePad, 6);
-        final Button btnIn = new JoystickButton(gamePad, 5);
-        final Button btnHangEx = new JoystickButton(gamePad, 4);
-        final Button btnHangRet = new JoystickButton(gamePad, 2);
-        final Button btnArmDown = new JoystickButton(gamePad, 1);
-        final Button btnArmUp = new JoystickButton(gamePad, 3);
 
-        // Joystick + Gamepad 
+        // Buttons
+        final Button btnOut = new JoystickButton(gamePad, BUMP_RIGHT); // Right bumper
+        final Button btnIn = new JoystickButton(gamePad, BUMP_LEFT); // Left bumper
+        final Button btnHangEx = new JoystickButton(gamePad, BTN_Y); // Y
+        final Button btnHangRet = new JoystickButton(gamePad, BTN_B); // B
+        final Button btnArmDown = new JoystickButton(gamePad, BTN_A); // A
+        final Button btnArmUp = new JoystickButton(gamePad, BTN_X); // X
+
+        // Joystick + Gamepad
         btnOut.whenPressed(new GoOut(m_intake, () -> (!btnOut.get())));
         btnIn.whenPressed(new TakeIn(m_intake, () -> (!btnIn.get())));
         btnHangEx.whenPressed(new HangEx(m_hanger, () -> (!btnHangEx.get())));
         btnHangRet.whenPressed(new HangRet(m_hanger, () -> (!btnHangRet.get())));
         btnArmDown.whenPressed(new ArmDown(m_arm, () -> (!btnArmDown.get())));
         btnArmUp.whenPressed(new ArmUp(m_arm, () -> (!btnArmUp.get())));
-
 
         // Joystick Solo Control
         // final Button btnOut = new JoystickButton(logi, 1);
@@ -71,20 +75,8 @@ public class RobotContainer {
      *
      * @return the command to run in autonomous
      */
-    // public Command getAutonomousCommand() {
-    //     // An ExampleCommand will run in autonomous
-    //     return m_autoCommand;
-    // }
-
-    public DriveTrain getDriveTrain() {
-        return m_drive;
-    }
-
-    public Arm getArm() {
-        return m_arm;
-    }
-
-    public Intake getIntake() {
-        return m_intake;
+    public Command getAutonomousCommand() {
+        // An ExampleCommand will run in autonomous
+        return m_autoCommand;
     }
 }

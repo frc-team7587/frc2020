@@ -13,9 +13,6 @@ import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.subsystems.Intake;
 
 public class GoOut extends WaitUntilCommand {
-  /**
-   * Creates a new GoOut.
-   */
 
   private Intake m_intake;
 
