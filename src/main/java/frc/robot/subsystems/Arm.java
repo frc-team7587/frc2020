@@ -18,11 +18,11 @@ public class Arm extends SubsystemBase {
   private final PWMSparkMax sMax = new PWMSparkMax(ARM_SPARK_PWM_ID);
 
   public void raise() {
-    sMax.set(ARM_MAX_SPEED);
+    sMax.set(-ARM_MAX_SPEED);
   }
 
   public void lower() {
-    sMax.set(-ARM_MAX_SPEED);
+    sMax.set(ARM_MAX_SPEED);
   }
 
   public void stop() {

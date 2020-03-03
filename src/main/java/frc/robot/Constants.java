@@ -20,7 +20,7 @@ public class Constants {
 
     // Arm constants
     public static final int ARM_SPARK_PWM_ID = 4;
-    public static final double ARM_MAX_SPEED = 0.40;
+    public static final double ARM_MAX_SPEED = 0.25;
 
     // Joystick constants
     public static final int LOGIJOY_PORT = 0;
