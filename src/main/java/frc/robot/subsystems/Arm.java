@@ -22,6 +22,7 @@ public class Arm extends SubsystemBase {
   private final CANSparkMax sparky = new CANSparkMax(1, MotorType.kBrushless);
 
   public void raise() {
+<<<<<<< HEAD
     // sMax.set(-ARM_MAX_SPEED);
     sparky.set(-ARM_MAX_SPEED);
   }
@@ -29,6 +30,13 @@ public class Arm extends SubsystemBase {
   public void lower() {
     // sMax.set(ARM_MAX_SPEED);
     sparky.set(0.25 * ARM_MAX_SPEED);
+=======
+    sMax.set(-ARM_MAX_SPEED);
+  }
+
+  public void lower() {
+    sMax.set(ARM_MAX_SPEED);
+>>>>>>> 8d7b2c2affda56a001cc0fe00e629c3388dc299e
   }
 
   public void stop() {
