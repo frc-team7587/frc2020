@@ -16,11 +16,11 @@ public class Constants {
 
     // Hanger constants
     public static final int HANGER_TALON_ID = 2;
-    public static final double HANGER_MAX_SPEED = 0.75;
+    public static final double HANGER_MAX_SPEED = 0.80;
 
     // Arm constants
     public static final int ARM_SPARK_PWM_ID = 4;
-    public static final double ARM_MAX_SPEED = 0.40;
+    public static final double ARM_MAX_SPEED = 0.15;
 
     // Joystick constants
     public static final int LOGIJOY_PORT = 0;
