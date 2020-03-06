@@ -18,11 +18,14 @@ public class AutoForward extends CommandBase {
   Timer time = new Timer();
 
   private DriveTrain mdrive;
+  private double seconds, speed;
 
-  public AutoForward(DriveTrain drive) {
+  public AutoForward(DriveTrain drive, double mseconds, double mspeed) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drive);
     mdrive = drive;
+    seconds = mseconds;
+    speed = mspeed;
   }
 
   // Called when the command is initially scheduled.
@@ -35,7 +38,7 @@ public class AutoForward extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    mdrive.drive(0.25, 0);
+    mdrive.drive(speed, 0);
   }
 
   // Called once the command ends or is interrupted.
@@ -47,6 +50,6 @@ public class AutoForward extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return time.get() > 1;
+    return time.get() > seconds;
   }
 }

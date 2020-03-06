@@ -12,9 +12,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 
 public class AutoPortDeploy extends SequentialCommandGroup {
-  public AutoPortDeploy(DriveTrain drive, Intake intake) {
-    super(
-      new AutoForward(drive), 
-      new AutoOutput(intake));
+  public AutoPortDeploy(DriveTrain drive, Intake intake, double seconds, double speed) {
+    super(new AutoForward(drive, seconds, speed), new AutoOutput(intake));
   }
 }

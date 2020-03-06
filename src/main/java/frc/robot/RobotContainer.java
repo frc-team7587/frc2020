@@ -20,14 +20,13 @@ public class RobotContainer {
     final Joystick logi = new Joystick(0);
     final Joystick gamePad = new Joystick(1);
 
-    private final Command m_autoCommand = new AutoPortDeploy(m_drive, m_intake);
+    private final Command m_autoCommand = new AutoPortDeploy(m_drive, m_intake, AUTO_PORT_DEPLOY_TIME,
+            AUTO_PORT_DEPLOY_SPEED);
 
     public RobotContainer() {
 
-        m_drive.setDefaultCommand(
-            new RunCommand(() -> m_drive.drive(-logi.getY() * logi.getThrottle(),
-                0.75 * logi.getTwist() * Math.abs(logi.getThrottle())), m_drive)
-            );
+        m_drive.setDefaultCommand(new RunCommand(() -> m_drive.drive(-logi.getY() * logi.getThrottle(),
+                0.75 * logi.getTwist() * Math.abs(logi.getThrottle())), m_drive));
 
         configureButtonBindings();
     }
@@ -50,7 +49,7 @@ public class RobotContainer {
         final Button btnArmDown = new JoystickButton(gamePad, BTN_A); // A
         final Button btnArmUp = new JoystickButton(gamePad, BTN_X); // X
 
-        // Joystick + Gamepad
+        // Gamepad control
         btnOut.whenPressed(new GoOut(m_intake, () -> (!btnOut.get())));
         btnIn.whenPressed(new TakeIn(m_intake, () -> (!btnIn.get())));
         btnHangEx.whenPressed(new HangEx(m_hanger, () -> (!btnHangEx.get())));
@@ -59,14 +58,14 @@ public class RobotContainer {
         btnArmUp.whenPressed(new ArmUp(m_arm, () -> (!btnArmUp.get())));
 
         // Joystick Solo Control
-        // final Button btnOut = new JoystickButton(logi, 1);
-        // final Button btnIn = new JoystickButton(logi, 2);
+        // final Button btnOut = new JoystickButton(logi, LOGI_BTN_1); //Trigger
+        // final Button btnIn = new JoystickButton(logi, LOGI_BTN_2); //Thumb button
 
-        // final Button btnHangEx = new JoystickButton(logi, 3);
-        // final Button btnHangRet = new JoystickButton(logi, 5);
+        // final Button btnHangEx = new JoystickButton(logi, LOGI_BTN_6); //Right side
+        // final Button btnHangRet = new JoystickButton(logi, LOGI_BTN_4);
 
-        // final Button btnArmDown = new JoystickButton(logi, 4);
-        // final Button btnArmUp = new JoystickButton(logi, 6);
+        // final Button btnArmDown = new JoystickButton(logi, LOGI_BTN_3); //Left side
+        // final Button btnArmUp = new JoystickButton(logi, LOGI_BTN_5);
 
     }
 

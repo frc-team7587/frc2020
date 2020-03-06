@@ -19,24 +19,18 @@ public class Arm extends SubsystemBase {
   /**
    * Creates a new Arm.
    */
-  //private final PWMSparkMax sMax = new PWMSparkMax(ARM_SPARK_PWM_ID);
   private final CANSparkMax sparky = new CANSparkMax(1, MotorType.kBrushless);
 
   public void raise() {
-    // sMax.set(-ARM_MAX_SPEED);
     sparky.set(-ARM_MAX_SPEED);
   }
 
   public void lower() {
-    
     sparky.set(0.25 * ARM_MAX_SPEED);
-    
   }
 
-
   public void stop() {
-
-    sparky.set(-0.05);
+    sparky.set(0);
   }
 
   public void reset() {

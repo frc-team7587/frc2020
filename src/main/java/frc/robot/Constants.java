@@ -20,10 +20,16 @@ public class Constants {
 
     // Arm constants
     public static final int ARM_SPARK_PWM_ID = 4;
-    public static final double ARM_MAX_SPEED = 0.15;
+    public static final double ARM_MAX_SPEED = 0.40;
 
     // Joystick constants
     public static final int LOGIJOY_PORT = 0;
+    public static final int LOGI_BTN_1 = 1;
+    public static final int LOGI_BTN_2 = 2;
+    public static final int LOGI_BTN_3 = 3;
+    public static final int LOGI_BTN_4 = 4;
+    public static final int LOGI_BTN_5 = 5;
+    public static final int LOGI_BTN_6 = 6;
 
     // Gamepad constants
     public static final int BTN_A = 1;
@@ -32,4 +38,8 @@ public class Constants {
     public static final int BTN_Y = 4;
     public static final int BUMP_LEFT = 5;
     public static final int BUMP_RIGHT = 6;
+
+    // Auto constants
+    public static final double AUTO_PORT_DEPLOY_TIME = 2;
+    public static final double AUTO_PORT_DEPLOY_SPEED = 0.25;
 }
