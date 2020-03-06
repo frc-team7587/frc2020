@@ -11,36 +11,31 @@ import com.revrobotics.*;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import static frc.robot.Constants.*;
-import edu.wpi.first.wpilibj.PWMSparkMax;
+// import edu.wpi.first.wpilibj.PWMSparkMax;
+// import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase {
   /**
    * Creates a new Arm.
    */
-  // private final PWMSparkMax sMax = new PWMSparkMax(ARM_SPARK_PWM_ID);
+  //private final PWMSparkMax sMax = new PWMSparkMax(ARM_SPARK_PWM_ID);
   private final CANSparkMax sparky = new CANSparkMax(1, MotorType.kBrushless);
 
   public void raise() {
-<<<<<<< HEAD
     // sMax.set(-ARM_MAX_SPEED);
     sparky.set(-ARM_MAX_SPEED);
   }
 
   public void lower() {
-    // sMax.set(ARM_MAX_SPEED);
+    
     sparky.set(0.25 * ARM_MAX_SPEED);
-=======
-    sMax.set(-ARM_MAX_SPEED);
+    
   }
 
-  public void lower() {
-    sMax.set(ARM_MAX_SPEED);
->>>>>>> 8d7b2c2affda56a001cc0fe00e629c3388dc299e
-  }
 
   public void stop() {
-    // sMax.set(0);
+
     sparky.set(-0.05);
   }
 
