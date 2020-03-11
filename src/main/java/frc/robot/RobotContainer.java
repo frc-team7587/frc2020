@@ -25,8 +25,11 @@ public class RobotContainer {
 
     public RobotContainer() {
 
-        m_drive.setDefaultCommand(new RunCommand(() -> m_drive.drive(-logi.getY() * logi.getThrottle(),
-                0.75 * logi.getTwist() * Math.abs(logi.getThrottle())), m_drive));
+        m_drive.setDefaultCommand(
+                new RunCommand(
+                        () -> m_drive.drive(DRIVE_SPEED_MULTIPLIER * -logi.getY() * logi.getThrottle(),
+                                DRIVE_SPEED_MULTIPLIER * 0.75 * logi.getTwist() * Math.abs(logi.getThrottle())),
+                        m_drive));
 
         configureButtonBindings();
     }

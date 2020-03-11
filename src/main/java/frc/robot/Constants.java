@@ -9,6 +9,7 @@ public class Constants {
     public static final int DRIVE_LEFT2 = 1;
     public static final int DRIVE_RIGHT1 = 2;
     public static final int DRIVE_RIGHT2 = 3;
+    public static final double DRIVE_SPEED_MULTIPLIER = 0.5;
 
     // Intake constants
     public static final int INTAKE_TALON_ID = 3;
